@@ -27,23 +27,12 @@ def buyLotsOfFruit(orderList):
             
     Returns cost of order
     """ 
-    totalCost = 0.0             
-    for i in range(0,len(orderList)-1):
+    totalCost = 0.0   
+    for i in range(0,len(orderList)):
         #If the fruit is in fruitPrices
         if(orderList[i][0]) in fruitPrices:
-            #How to access the value in fruitPrices that matches the key orderList[i][1]??????????
-            #totalCost = totalCost + (orderList[i][2]*fruitPrices[`orderList[i][1]`]
-            if(orderList[i][0] == fruitPrices.keys()[0]):
-                totalCost = totalCost + (orderList[i][1]*fruitPrices[fruitPrices.keys()[0]])
-            elif(orderList[i][0] == fruitPrices.keys()[1]):
-                totalCost = totalCost + (orderList[i][1]*fruitPrices[fruitPrices.keys()[1]])
-            elif(orderList[i][0] == fruitPrices.keys()[2]):
-                totalCost = totalCost + (orderList[i][1]*fruitPrices[fruitPrices.keys()[2]])
-            elif(orderList[i][0] == fruitPrices.keys()[3]):
-                totalCost = totalCost + (orderList[i][1]*fruitPrices[fruitPrices.keys()[3]])
-            elif(orderList[i][0] == fruitPrices.keys()[4]):
-                totalCost = totalCost + (orderList[i][1]*fruitPrices[fruitPrices.keys()[4]])
-        #The fruit is not in our prices list
+            totalCost = totalCost + (orderList[i][1]*fruitPrices[orderList[i][0]])
+        #Fruit is not in fruitPrices
         else:
             print("You have entered a fruit that is not in our records.")
             return None
@@ -54,4 +43,6 @@ def buyLotsOfFruit(orderList):
 if __name__ == '__main__':
     "This code runs when you invoke the script from the command line"
     orderList = [ ('apples', 2.0), ('pears', 3.0), ('limes', 4.0) ]
+    #A different orderList to test
+    #orderList = [('apples', 2.0), ('blueberries', 3.0), ('limes', 4.0)]
     print ('Cost of', orderList, 'is', buyLotsOfFruit(orderList))
