@@ -21,9 +21,18 @@ def shopSmart(orderList, fruitShops):
     """
         orderList: List of (fruit, numPound) tuples
         fruitShops: List of FruitShops
-    """    
-    "*** YOUR CODE HERE ***"
-    return None
+    """   
+    #Go ahead and make the first shop the min cost for now 
+    minCost = fruitShops[0].getPriceOfOrder(orderList)
+    shop_num = 0
+    for shop in range(1, len(fruitShops)):
+        cost = fruitShops[shop].getPriceOfOrder(orderList)
+        #If the current shop is a less price (will be the same for the first shop so it doens't really matter)
+        if(cost<minCost):
+            minCost = cost
+            shop_num = shop
+        
+    return fruitShops[shop_num]
     
 if __name__ == '__main__':
   "This code runs when you invoke the script from the command line"
@@ -33,6 +42,6 @@ if __name__ == '__main__':
   dir2 = {'apples': 1.0, 'oranges': 5.0}
   shop2 = shop.FruitShop('shop2',dir2)
   shops = [shop1, shop2]
-  print "For orders ", orders, ", the best shop is", shopSmart(orders, shops).getName()
+  print ("For orders ", orders, ", the best shop is", shopSmart(orders, shops).getName())
   orders = [('apples',3.0)]
-  print "For orders: ", orders, ", the best shop is", shopSmart(orders, shops).getName()
+  print ("For orders: ", orders, ", the best shop is", shopSmart(orders, shops).getName())
