@@ -148,7 +148,7 @@ class PositionSearchProblem(search.SearchProblem):
         self.goal = goal
         self.costFn = costFn
         if warn and (gameState.getNumFood() != 1 or not gameState.hasFood(*goal)):
-            print 'Warning: this does not look like a regular search maze'
+            print ('Warning: this does not look like a regular search maze')
 
         # For display purposes
         self._visited, self._visitedlist, self._expanded = {}, [], 0
@@ -272,7 +272,7 @@ class CornersProblem(search.SearchProblem):
         self.corners = ((1,1), (1,top), (right, 1), (right, top))
         for corner in self.corners:
             if not startingGameState.hasFood(*corner):
-                print 'Warning: no food in corner ' + str(corner)
+                print ('Warning: no food in corner ' + str(corner))
         self._expanded = 0 # Number of search nodes expanded
 
         "*** YOUR CODE HERE ***"
@@ -452,7 +452,7 @@ class ClosestDotSearchAgent(SearchAgent):
                     raise Exception, 'findPathToClosestDot returned an illegal move: %s!\n%s' % t
                 currentState = currentState.generateSuccessor(0, action)
         self.actionIndex = 0
-        print 'Path found with cost %d.' % len(self.actions)
+        print ('Path found with cost %d.' % len(self.actions))
 
     def findPathToClosestDot(self, gameState):
         "Returns a path (a list of actions) to the closest dot, starting from gameState"
