@@ -114,7 +114,28 @@ def breadthFirstSearch(problem):
     [2nd Edition: p 73, 3rd Edition: p 82]
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    tree = util.Queue()
+    start = problem.getStartState()
+    if(problem.isGoalState(start)):
+        return []
+    tree.push((start, []))  #the empty vector will hold the path from start to node (but there doesn't exist one for start)
+    expanded_nodes = []
+    
+    while not tree.isEmpty():
+        current, moves = tree.pop() 
+        if current not in expanded_nodes:
+            expanded_nodes.append(current)
+
+            if problem.isGoalState(current):
+                return moves
+            
+            successors = problem.getSuccessors(current)
+            #for every successor
+            for i in range(0,len(successors)):
+                path = moves + [successors[i][1]]
+                tree.push((successors[i][0], path))
+
 
 def uniformCostSearch(problem):
     "Search the node of least total cost first. "
