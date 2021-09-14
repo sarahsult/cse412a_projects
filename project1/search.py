@@ -11,7 +11,6 @@ In search.py, you will implement generic search algorithms which are called
 by Pacman agents (in searchAgents.py).
 """
 
-from project1.util import Stack
 import util
 
 class SearchProblem:
@@ -87,33 +86,27 @@ def depthFirstSearch(problem):
     "*** YOUR CODE HERE ***"
 
     
-    tree = Stack()
-    current = problem.getStartState()
-    tree.push(current)
-    if(problem.isGoalState(current)):
+    tree = util.Stack()
+    start = problem.getStartState()
+    if(problem.isGoalState(start)):
         return []
+    tree.push((start, []))  #the empty vector will hold the path from start to node (but there doesn't exist one for start)
     expanded_nodes = []
-    current = tree.pop() #this is the same node current already is
-    expanded_nodes.append(current) #add the start to nodes expanded 
     
-    while(problem.isGoalState(current) != True):
-        successors = problem.getSuccessors(current)
-        #for every successor
-        for i in range(0,len(successors)):
-            #add them to the tree - EACH NODE ITSELF NEEDS TO HAVE IN ITS INFO THE PATH FROM START TO THAT SUCCESSOR
-            successors[i][3] = current[1] + successors[i][1]
-            tree.push(successors[i])
-        #check to make sure what you pop hasn't been expanded 
-        current = tree.pop()
-        while(current in expanded_nodes):
-            current = tree.pop()
-        #add this node to nodes exanded
-        expanded_nodes.append(current)
+    while not tree.isEmpty():
+        current, moves = tree.pop() 
+        if current not in expanded_nodes:
+            expanded_nodes.append(current)
 
-    return current[3]
+            if problem.isGoalState(current):
+                return moves
+            
+            successors = problem.getSuccessors(current)
+            #for every successor
+            for i in range(0,len(successors)):
+                path = moves + [successors[i][1]]
+                tree.push((successors[i][0], path))
     
-
-    #util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """
