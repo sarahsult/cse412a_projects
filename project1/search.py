@@ -160,9 +160,10 @@ def uniformCostSearch(problem):
             successors = problem.getSuccessors(current)
             #for every successor
             for i in range(0,len(successors)):
+                print successors[i]
                 path = moves + [successors[i][1]]
-                cost = cost + successors[i][2]
-                tree.push((successors[i][0], path, cost), cost)
+                newcost = cost + successors[i][2]
+                tree.push((successors[i][0], path, newcost), newcost)
 
 
 def nullHeuristic(state, problem=None):
