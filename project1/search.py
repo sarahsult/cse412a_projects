@@ -115,11 +115,13 @@ def breadthFirstSearch(problem):
     """
     "*** YOUR CODE HERE ***"
 
+    #This will be the same as DFS but changing the data structure for the tree changes what nodes are popped and allows for 
+    #breath vs depth
     tree = util.Queue()
     start = problem.getStartState()
     if(problem.isGoalState(start)):
         return []
-    tree.push((start, []))  #the empty vector will hold the path from start to node (but there doesn't exist one for start)
+    tree.push((start, []))  
     expanded_nodes = []
     
     while not tree.isEmpty():
@@ -146,7 +148,9 @@ def uniformCostSearch(problem):
     if(problem.isGoalState(start)):
         return []
     tree.push((start, [], 0), 0)  #the empty vector will hold the path from start to node (but there doesn't exist one for 
-    #               start and the 0 is going to be the priority which corresponds to the cost to get to that node
+    #               start and the 0 is going to be the priority which corresponds to the cost to get to that node; you need both
+    #               values because one tell in what order to pop from but you need to be able to access that value after popping
+    #               so it has to go in with the node info
     expanded_nodes = []
 
     while not tree.isEmpty():
@@ -175,6 +179,31 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     "Search the node that has the lowest combined cost and heuristic first."
     "*** YOUR CODE HERE ***"
+
+    #This can be the same as UCS but changing what the priority is in the priority queue
+    tree = util.PriorityQueue()
+    start = problem.getStartState()
+    if(problem.isGoalState(start)):
+        return []
+    tree.push((start, [], 0), 0)  
+    expanded_nodes = []
+
+    while not tree.isEmpty():
+        current, moves, cost = tree.pop()
+        if current not in expanded_nodes:
+            expanded_nodes.append(current)
+        
+            if problem.isGoalState(current):
+                return moves
+            
+            successors = problem.getSuccessors(current)
+            #for every successor
+            for i in range(0,len(successors)):
+                path = moves + [successors[i][1]]
+                gn = cost + successors[i][2] 
+                hn = heuristic(successors[i][0], problem)
+                tree.push((successors[i][0], path, gn), (gn+hn))
+
     util.raiseNotDefined()
 
 
