@@ -361,7 +361,28 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    
+    #we can just bank on the manhattan distance to each corner - that gives us a value for each corner and then we could add them 
+    #           together
+    #       so since adding them together wasn't admissible (which means its not lower bounded... picking the shortest manhattan
+    #       dist should be)
+    #       OK so the min manhattan dist exapnded too many nodes...
+    visited_corners = state[1]
+    if len(visited_corners) ==4:
+        return 0
+    #we need to find what corners we have left to visit
+    corners_left = list()
+    for i in range(0,len(corners)):
+        if corners[i] not in visited_corners:
+            corners_left.append(corners[i])
+
+    min_manhat = util.manhattanDistance(state[0], corners_left[0])
+
+    for j in range(1, len(corners_left)):
+        manhat_heur = util.manhattanDistance(state[0], corners_left[j])
+        if(manhat_heur < min_manhat):
+            min_manhat = manhat_heur
+    return min_manhat
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
