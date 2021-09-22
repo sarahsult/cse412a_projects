@@ -376,13 +376,17 @@ def cornersHeuristic(state, problem):
         if corners[i] not in visited_corners:
             corners_left.append(corners[i])
 
-    min_manhat = util.manhattanDistance(state[0], corners_left[0])
+    #I tried just switching max_manhat with min_manhat (and switching direction of if-statement inequ - 1360
+    #I knew it was a lower bound, so I added 1 - went down to 1359
+    #I added 2 - stayed at 1359
+    #Figured multiplication would get the job done faster, so I multiplied by 2 - 587
+    max_manhat = util.manhattanDistance(state[0], corners_left[0])
 
     for j in range(1, len(corners_left)):
         manhat_heur = util.manhattanDistance(state[0], corners_left[j])
-        if(manhat_heur < min_manhat):
-            min_manhat = manhat_heur
-    return min_manhat
+        if(manhat_heur > max_manhat):
+            max_manhat = manhat_heur
+    return max_manhat * 2
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
