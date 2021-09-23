@@ -366,7 +366,9 @@ def cornersHeuristic(state, problem):
     #           together
     #       so since adding them together wasn't admissible (which means its not lower bounded... picking the shortest manhattan
     #       dist should be)
-    #       OK so the min manhattan dist exapnded too many nodes...
+    #       OK so the min manhattan dist exapnded too many nodes --> finding the closest corner doens't mean that we are closest to 
+    #           the final state... once we find the closest corner, we need to find the closest corner from THAT corner and so on 
+    #           until we have visited all corners. THAT is the distance to the final STATE
     visited_corners = state[1]
     if len(visited_corners) ==4:
         return 0
@@ -376,17 +378,28 @@ def cornersHeuristic(state, problem):
         if corners[i] not in visited_corners:
             corners_left.append(corners[i])
 
-    #I tried just switching max_manhat with min_manhat (and switching direction of if-statement inequ - 1360
-    #I knew it was a lower bound, so I added 1 - went down to 1359
-    #I added 2 - stayed at 1359
-    #Figured multiplication would get the job done faster, so I multiplied by 2 - 587
-    max_manhat = util.manhattanDistance(state[0], corners_left[0])
-
-    for j in range(1, len(corners_left)):
-        manhat_heur = util.manhattanDistance(state[0], corners_left[j])
-        if(manhat_heur > max_manhat):
-            max_manhat = manhat_heur
-    return max_manhat * 2
+    total_cost = 0
+    current_node = state[0]
+    #see if any other corner is closest
+    while(len(corners_left) != 0):
+        #start with the first corner and assume it's the closest
+        #print corners_left
+        min_manhat = util.manhattanDistance(current_node, corners_left[0])
+        closest_corner = corners_left[0]
+        #print closest_corner
+        for j in range(1, len(corners_left)):
+            manhat_heur = util.manhattanDistance(current_node, corners_left[j])
+            #print("hi")
+            if(manhat_heur < min_manhat):
+                min_manhat = manhat_heur
+                closest_corner = corners_left[j]
+                #print "here"
+        #print closest_corner
+        #print corners_left
+        current_node = closest_corner
+        total_cost = total_cost + min_manhat
+        corners_left.remove(closest_corner)
+    return total_cost
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
