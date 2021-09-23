@@ -528,7 +528,8 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #since we need a list of actions... that's something that the early search algorithms can do
+        return search.uniformCostSearch(problem)
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -564,7 +565,10 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         x,y = state
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        #just need to check if the current state is a food 
+        if state in self.food.asList():
+            return True
+        return False
 
 ##################
 # Mini-contest 1 #
