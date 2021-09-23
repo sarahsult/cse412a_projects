@@ -490,7 +490,17 @@ def foodHeuristic(state, problem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    foodGrid = foodGrid.asList()
+    total_cost = 0
+    current_node = position
+    
+    #finds the distance from the state to each food and adds them together and takes the max
+    heurs = [0]
+    for i in range(0, len(foodGrid)):
+        manh_dist = util.manhattanDistance(current_node, foodGrid[i])
+        heurs += [manh_dist]
+    #print heurs
+    return max(heurs)
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
