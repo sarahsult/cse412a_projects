@@ -498,8 +498,8 @@ def foodHeuristic(state, problem):
     heurs = [0]
     for i in range(0, len(foodGrid)):
         #manh_dist = util.manhattanDistance(current_node, foodGrid[i])
-        maze_dist = mazeDistance(current_node, foodGrid[i], problem.startingGameState)
-        heurs += [maze_dist]
+        maze_distance = mazeDistance(current_node, foodGrid[i], problem.startingGameState)
+        heurs += [maze_distance]
     #print heurs
     return max(heurs)
 
