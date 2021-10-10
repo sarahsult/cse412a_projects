@@ -8,7 +8,7 @@
 
 from util import manhattanDistance
 from game import Directions
-import random, util
+import random, util, sys  #added sys
 
 from game import Agent
 
@@ -63,12 +63,29 @@ class ReflexAgent(Agent):
     # Useful information you can extract from a GameState (pacman.py)
     successorGameState = currentGameState.generatePacmanSuccessor(action)
     newPos = successorGameState.getPacmanPosition()
-    newFood = successorGameState.getFood()
+    newFood = successorGameState.getFood()    #newFood.asList() gets you the LOCATIONS of the food where as this is booleans
     newGhostStates = successorGameState.getGhostStates()
     newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
 
     "*** YOUR CODE HERE ***"
-    return successorGameState.getScore()
+    #TWO OVERALL GOALS: eat food, avoid ghosts
+
+    #want to eat the closest food so the closer to food the better
+    newFood = newFood.asList()
+    closest_food = sys.maxint
+    for food in newFood:
+      food_dist = manhattanDistance(newPos, food)
+      if(food_dist < closest_food):
+        closest_food = food_dist
+
+    #but need to avoid ghosts
+    ghost_positions = successorGameState.getGhostPositions()
+    for ghost in ghost_positions:
+      if(manhattanDistance(newPos, ghost)<3):
+        return -sys.maxint                       #REALLY BAD DO NOT PASS GO LET'S NOT GO HERE WE'RE TOO CLOSE
+
+    #                                         reciprocal (from instructions) allows a close food to be a high score (which is what we want)
+    return successorGameState.getScore() + 1.0/closest_food
 
 def scoreEvaluationFunction(currentGameState):
   """
