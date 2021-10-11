@@ -146,10 +146,9 @@ class MinimaxAgent(MultiAgentSearchAgent):
     """
     "*** YOUR CODE HERE ***"
     #Pacman is a max level so we will want to get the info from the function for max level
-    return self.maxlevel(gameState, 0, 0) #THIS NEEDS TO BE AN ACTION
+    return self.maxlevel(gameState, 0, 0)[1]     #THIS NEEDS TO BE AN ACTION
   
   def minimax(self, gameState, index, depth):
-    #print "in minimax"
     #this would mean we are at a terminal node or the game is over
     if depth is self.depth * gameState.getNumAgents():
        return self.evaluationFunction(gameState)
@@ -158,12 +157,11 @@ class MinimaxAgent(MultiAgentSearchAgent):
 
     #the root is pacman which is a maxlevel and index 0 so by pattern, even indicies will go to maxlevel and odd to minlvel
     if index == 0:
-      return self.maxlevel(gameState, 0, depth)
+      return self.maxlevel(gameState, 0, depth)[0]
     else:
-      return self.minlevel(gameState, index, depth)
+      return self.minlevel(gameState, index, depth)[0]
   
   def maxlevel(self, gameState, index, depth):
-    #print "in max level"
     #initiate to -inf
     v = [-sys.maxint, "action"]
 
@@ -179,26 +177,27 @@ class MinimaxAgent(MultiAgentSearchAgent):
       if(v[0]<succ_action[0]):
         v=succ_action
     
-    return v[1]
+    return v
   
   def minlevel(self, gameState, index, depth):
-    #print "in min level"
     #initiate to inf
     v = [sys.maxint, "action"]
 
     #for each successor of state
     legal_actions = gameState.getLegalActions(index)
-    successors = []
+    successors = list()
     for action in legal_actions:
       successors.append((gameState.generateSuccessor(index, action), action))
     
-    #take the max
+    #take the min
     for successor in successors:
       succ_action = (self.minimax(successor[0], (depth + 1)%gameState.getNumAgents(), depth+1), successor[1])
-      if(v[0]<succ_action[0]):
+      #if(v[0]<succ_action[0]):
+        #v=succ_action
+      if(succ_action[0]<v[0]):
         v=succ_action
     
-    return v[1]
+    return v
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
   """
@@ -212,21 +211,74 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       Returns the minimax action using self.depth and self.evaluationFunction
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    #Pacman is a max level so we will want to get the info from the function for max level
+    action = self.maxlevel(gameState, 0, 0, -sys.maxint, sys.maxint)[1]
+    #print action
+    return action
   
-  def alphabeta(self):
-    util.raiseNotDefined()
+  def alphabeta(self, gameState, index, depth, alpha, beta):
+    #this would mean we are at a terminal node or the game is over
+    if depth is self.depth * gameState.getNumAgents():
+       return self.evaluationFunction(gameState)
+    if gameState.isLose() or gameState.isWin():
+        return self.evaluationFunction(gameState)
 
-  def maxlevel(self):
-    util.raiseNotDefined()
+    #the root is pacman which is a maxlevel and index 0 so by pattern, even indicies will go to maxlevel and odd to minlvel
+    if index == 0:
+      return self.maxlevel(gameState, 0, depth, alpha, beta)[0]
+    else:
+      return self.minlevel(gameState, index, depth, alpha, beta)[0]
 
-  def minlevel(self):
-    util.raiseNotDefined()
+  def maxlevel(self, gameState, index, depth, alpha, beta):
+    #initiate to -inf
+    v = [-sys.maxint, "action"]
+
+    #for each successor of state
+    legal_actions = gameState.getLegalActions(index)
+    successors = list()
+    for action in legal_actions:
+      successors.append((gameState.generateSuccessor(index, action), action))
+    
+    #take the max
+    for successor in successors:
+      succ_action = (self.alphabeta(successor[0], (depth + 1)%gameState.getNumAgents(), depth+1, alpha, beta), successor[1])
+      if(v[0]<succ_action[0]):
+        v=succ_action
+      #here is the pruning
+      if(v[0] > beta):
+        return v
+      else: alpha = max(v[0], alpha)
+      
+    return v
+
+  def minlevel(self, gameState, index, depth, alpha, beta):
+    #initiate to inf
+    v = [sys.maxint, "action"]
+
+    #for each successor of state
+    legal_actions = gameState.getLegalActions(index)
+    successors = list()
+    for action in legal_actions:
+      successors.append((gameState.generateSuccessor(index, action), action))
+    
+    #take the min
+    for successor in successors:
+      succ_action = (self.alphabeta(successor[0], (depth + 1)%gameState.getNumAgents(), depth+1, alpha, beta), successor[1])
+      if(succ_action[0]<v[0]):
+        v=succ_action
+      #here is the pruning
+      if(v[0] < alpha):
+        return v
+      else: beta = min(v[0], beta)
+      
+    return v
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
   """
     Your expectimax agent (question 4)
   """
+
+  #will be similar function structure to the last two
 
   def getAction(self, gameState):
     """
@@ -236,6 +288,15 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
       legal moves.
     """
     "*** YOUR CODE HERE ***"
+    util.raiseNotDefined()
+  
+  def expectimax(self):
+    util.raiseNotDefined()
+  
+  def maxlevel(self):
+    util.raiseNotDefined()
+  
+  def explevel(self):
     util.raiseNotDefined()
 
 def betterEvaluationFunction(currentGameState):
