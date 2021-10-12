@@ -288,16 +288,56 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
       legal moves.
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    #Pacman is a max level so we will want to get the info from the function for max level
+    return self.maxlevel(gameState, 0, 0, "action")[1]     #THIS NEEDS TO BE AN ACTION
   
-  def expectimax(self):
-    util.raiseNotDefined()
+  def expectimax(self, gameState, index, depth, action):
+    #this would mean we are at a terminal node or the game is over
+    if depth is self.depth * gameState.getNumAgents():
+       return self.evaluationFunction(gameState)
+    if gameState.isLose() or gameState.isWin():
+        return self.evaluationFunction(gameState)
+
+    #the root is pacman which is a maxlevel and index 0 so by pattern, even indicies will go to maxlevel and odd to minlvel
+    if index == 0:
+      return self.maxlevel(gameState, 0, depth, action)[0]
+    else:
+      return self.explevel(gameState, index, depth, action)[0]
   
-  def maxlevel(self):
-    util.raiseNotDefined()
+  def maxlevel(self, gameState, index, depth, action):
+    #initiate to -inf
+    v = [-sys.maxint, "action"]
+
+    #for each successor of state
+    legal_actions = gameState.getLegalActions(index)
+    successors = list()
+    for action in legal_actions:
+      successors.append((gameState.generateSuccessor(index, action), action))
+    
+    #take the max
+    for successor in successors:
+      succ_action = (self.expectimax(successor[0], (depth + 1)%gameState.getNumAgents(), depth+1, successor[1]), successor[1])
+      if(v[0]<succ_action[0]):
+        v=succ_action
+    
+    return v
   
-  def explevel(self):
-    util.raiseNotDefined()
+  def explevel(self, gameState, index, depth, action):
+    #initiate to 0
+    v = [0, "action"]
+
+    #for each successor of state
+    legal_actions = gameState.getLegalActions(index)
+    successors = list()
+    for action in legal_actions:
+      successors.append((gameState.generateSuccessor(index, action), action))
+
+    #find the probability
+    prob = 1/len(legal_actions)
+    for successor in successors:
+      v[0] += prob * self.expectimax(successor[0], (depth + 1)%gameState.getNumAgents(), depth+1, action)
+    
+    return v
 
 def betterEvaluationFunction(currentGameState):
   """
