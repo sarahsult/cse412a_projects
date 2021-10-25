@@ -344,10 +344,36 @@ def betterEvaluationFunction(currentGameState):
     Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
     evaluation function (question 5).
 
-    DESCRIPTION: <write something here so we know what you did>
+    DESCRIPTION: I pulled in values about the current state which affect its value, then weighted each piece of
+    information based on its importance to the state's value.
   """
   "*** YOUR CODE HERE ***"
-  util.raiseNotDefined()
+  #useful values
+  pac_pos = currentGameState.getPacmanPosition()
+  food_pos = currentGameState.getFood().asList()
+  ghost_pos = currentGameState.getGhostPositions()
+
+  #check if food is nearby
+  closest_food = sys.maxint
+  for food in food_pos:
+    food_dist = manhattanDistance(pac_pos, food)
+    if (food_dist < closest_food):
+      closest_food = food_dist
+
+
+  #check if ghosts are nearby
+  close_ghost = sys.maxint
+  for ghost in ghost_pos:
+      ghost_dist = manhattanDistance(pac_pos, ghost)
+      if (ghost_dist < 3):
+        return -sys.maxint
+      elif(ghost_dist < close_ghost):
+        close_ghost = ghost_dist
+
+  # check if ghosts and food are same direction?
+
+  #combine them (weighted)
+  return closest_food - close_ghost
 
 # Abbreviation
 better = betterEvaluationFunction
