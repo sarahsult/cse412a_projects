@@ -339,6 +339,8 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
     
     return v
 
+
+
 def betterEvaluationFunction(currentGameState):
   """
     Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
@@ -355,25 +357,40 @@ def betterEvaluationFunction(currentGameState):
 
   #check if food is nearby
   closest_food = sys.maxint
+  closest_food_pos = 0
   for food in food_pos:
     food_dist = manhattanDistance(pac_pos, food)
+    #food_dist = mazeDistance(pac_pos, food, currentGameState)
     if (food_dist < closest_food):
       closest_food = food_dist
+      closest_food_pos = food
 
 
   #check if ghosts are nearby
   close_ghost = sys.maxint
+  close_ghost_pos = 0
   for ghost in ghost_pos:
       ghost_dist = manhattanDistance(pac_pos, ghost)
-      if (ghost_dist < 3):
-        return -sys.maxint
-      elif(ghost_dist < close_ghost):
+      #ghost_dist = mazeDistance(pac_pos, ghost, currentGameState)
+      if (ghost_dist < close_ghost):
         close_ghost = ghost_dist
+        close_ghost_pos = ghost
+  #combine them (weighted somehow?)
+  eval = close_ghost + 1.0/closest_food
 
-  # check if ghosts and food are same direction?
+  # check if ghosts and food are same direction
+  food_x = closest_food_pos[0] - pac_pos[0]
+  food_y = closest_food_pos[1] - pac_pos[1]
+  ghost_x = close_ghost_pos[0] - pac_pos[0]
+  ghost_y = close_ghost_pos[1] - pac_pos[1]
 
-  #combine them (weighted)
-  return closest_food - close_ghost
+  if (food_x*ghost_x < 0):
+    eval += 0.5
+  if (food_y*ghost_y < 0):
+    eval += 0.5
+
+  #return statement
+  return eval
 
 # Abbreviation
 better = betterEvaluationFunction
@@ -393,4 +410,6 @@ class ContestAgent(MultiAgentSearchAgent):
     """
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+
+
 

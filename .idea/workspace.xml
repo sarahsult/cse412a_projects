@@ -16,10 +16,19 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="Decreased expanded nodes for Q6" />
+    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="non-functional question 5">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2/multiAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/project2/multiAgents.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +46,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -70,7 +80,35 @@
       <option name="project" value="LOCAL" />
       <updated>1632302484006</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Decreased expanded nodes for Q6">
+      <created>1632303054924</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1632303054924</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Decreased expanded nodes for Q6">
+      <created>1633366995530</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1633366995530</updated>
+    </task>
+    <task id="LOCAL-00006" summary="switched to maze_dist from manhattan for Q7">
+      <created>1633367133634</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1633367133634</updated>
+    </task>
+    <task id="LOCAL-00007" summary="non-functional question 5">
+      <created>1635187497080</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1635187497080</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -88,17 +126,24 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Decreased nodes expanded for Q6 (trial and error)" />
     <MESSAGE value="Decreased expanded nodes for Q6" />
-    <option name="LAST_COMMIT_MESSAGE" value="Decreased expanded nodes for Q6" />
+    <MESSAGE value="switched to maze_dist from manhattan for Q7" />
+    <MESSAGE value="non-functional question 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="non-functional question 5" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1632302496679">
+    <state x="229" y="70" key="SettingsEditor" timestamp="1632303243769">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1632302496679" />
-    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1632302415425">
-      <screen x="0" y="23" width="1440" height="821" />
+    <state x="229" y="70" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1632303243769" />
+    <state x="320" y="157" key="Vcs.Push.Dialog.v2" timestamp="1635187528961">
+      <screen x="0" y="23" width="1440" height="817" />
     </state>
-    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.817@0.23.1440.817" timestamp="1631651868358" />
-    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.821@0.23.1440.821" timestamp="1632302415425" />
+    <state x="320" y="157" key="Vcs.Push.Dialog.v2/0.23.1440.817@0.23.1440.817" timestamp="1635187528961" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1632303876651" />
+    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1634750306110">
+      <screen x="0" y="23" width="1440" height="817" />
+    </state>
+    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.817@0.23.1440.817" timestamp="1634750306110" />
+    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.821@0.23.1440.821" timestamp="1634152205376" />
   </component>
 </project>
