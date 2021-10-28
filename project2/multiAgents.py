@@ -360,7 +360,7 @@ def betterEvaluationFunction(currentGameState):
   closest_food_pos = 0
   for food in food_pos:
     food_dist = manhattanDistance(pac_pos, food)
-    #food_dist = mazeDistance(pac_pos, food, currentGameState)
+    #update closest food
     if (food_dist < closest_food):
       closest_food = food_dist
       closest_food_pos = food
@@ -371,26 +371,41 @@ def betterEvaluationFunction(currentGameState):
   close_ghost_pos = 0
   for ghost in ghost_pos:
       ghost_dist = manhattanDistance(pac_pos, ghost)
-      #ghost_dist = mazeDistance(pac_pos, ghost, currentGameState)
+      if(ghost_dist<3):
+        return -100000000000                 #added this because if a ghost is too close it's REALLY BAD
+      #update closest ghost
       if (ghost_dist < close_ghost):
         close_ghost = ghost_dist
         close_ghost_pos = ghost
-  #combine them (weighted somehow?)
-  eval = close_ghost + 1.0/closest_food
+  #combine them (weighted somehow?) i'd think a close ghost is worse than close food is good
+  eval = close_ghost + 1000*(1.0/closest_food)
 
-  # check if ghosts and food are same direction
-  food_x = closest_food_pos[0] - pac_pos[0]
-  food_y = closest_food_pos[1] - pac_pos[1]
-  ghost_x = close_ghost_pos[0] - pac_pos[0]
-  ghost_y = close_ghost_pos[1] - pac_pos[1]
+   #check if ghosts and food are same direction
+  #food_x = closest_food_pos[0] - pac_pos[0]
+  #food_y = closest_food_pos[1] - pac_pos[1]
+  #ghost_x = close_ghost_pos[0] - pac_pos[0]
+  #ghost_y = close_ghost_pos[1] - pac_pos[1]
 
-  if (food_x*ghost_x < 0):
-    eval += 0.5
-  if (food_y*ghost_y < 0):
-    eval += 0.5
+  #if (food_x*ghost_x < 0):
+    #eval += 0.5
+  #if (food_y*ghost_y < 0):
+    #eval += 0.5
+
+  #maybe the number of food left (the fewer left the better?):
+  num_food_left = currentGameState.getNumFood()
+  eval += (1/(num_food_left))*5000
+  num_cap_left = len(currentGameState.getCapsules() )
+  eval += (1/(num_cap_left))*25000
+
+  #also if you've reached a win or loose state
+  if currentGameState.isLose():
+    eval -= 100000000000
+  elif currentGameState.isWin():
+    eval += 100000000000
 
   #return statement
   return eval
+
 
 # Abbreviation
 better = betterEvaluationFunction
