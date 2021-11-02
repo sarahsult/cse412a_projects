@@ -25,7 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="non-functional question 5">
+    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="tried to check direction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project2/multiAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/project2/multiAgents.py" afterDir="false" />
     </list>
@@ -108,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635187497080</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="tried to check direction">
+      <created>1635363283214</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1635363283214</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -128,22 +135,23 @@
     <MESSAGE value="Decreased expanded nodes for Q6" />
     <MESSAGE value="switched to maze_dist from manhattan for Q7" />
     <MESSAGE value="non-functional question 5" />
-    <option name="LAST_COMMIT_MESSAGE" value="non-functional question 5" />
+    <MESSAGE value="tried to check direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried to check direction" />
   </component>
   <component name="WindowStateProjectService">
     <state x="229" y="70" key="SettingsEditor" timestamp="1632303243769">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="229" y="70" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1632303243769" />
-    <state x="320" y="157" key="Vcs.Push.Dialog.v2" timestamp="1635187528961">
-      <screen x="0" y="23" width="1440" height="817" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1635363309181">
+      <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="320" y="157" key="Vcs.Push.Dialog.v2/0.23.1440.817@0.23.1440.817" timestamp="1635187528961" />
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1632303876651" />
-    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1634750306110">
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1635363309181" />
+    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1635793760002">
       <screen x="0" y="23" width="1440" height="817" />
     </state>
-    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.817@0.23.1440.817" timestamp="1634750306110" />
+    <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.817@0.23.1440.817" timestamp="1635793760002" />
     <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.821@0.23.1440.821" timestamp="1634152205376" />
   </component>
 </project>

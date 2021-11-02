@@ -310,6 +310,8 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
 
     #for each successor of state
     legal_actions = gameState.getLegalActions(index)
+    if not legal_actions:
+      return self.evaluationFunction(gameState)
     successors = list()
     for action in legal_actions:
       successors.append((gameState.generateSuccessor(index, action), action))
@@ -346,65 +348,87 @@ def betterEvaluationFunction(currentGameState):
     Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
     evaluation function (question 5).
 
-    DESCRIPTION: I pulled in values about the current state which affect its value, then weighted each piece of
+    DESCRIPTION: I pulled in and calculated values about the current state which affect its value, then weighted each piece of
     information based on its importance to the state's value.
   """
   "*** YOUR CODE HERE ***"
+
+  if currentGameState.isLose():
+    return -sys.maxint
+  elif currentGameState.isWin():
+    return sys.maxint
+
   #useful values
   pac_pos = currentGameState.getPacmanPosition()
   food_pos = currentGameState.getFood().asList()
   ghost_pos = currentGameState.getGhostPositions()
+  cap_pos = currentGameState.getCapsules()
+  ghosts = currentGameState.getGhostStates()
 
   #check if food is nearby
   closest_food = sys.maxint
-  closest_food_pos = 0
   for food in food_pos:
-    food_dist = manhattanDistance(pac_pos, food)
+    food_dist = abs(pac_pos[0]-food[0]) + abs(pac_pos[1]-food[1])
     #update closest food
     if (food_dist < closest_food):
       closest_food = food_dist
-      closest_food_pos = food
-
 
   #check if ghosts are nearby
   close_ghost = sys.maxint
-  close_ghost_pos = 0
   for ghost in ghost_pos:
-      ghost_dist = manhattanDistance(pac_pos, ghost)
-      if(ghost_dist<3):
-        return -100000000000                 #added this because if a ghost is too close it's REALLY BAD
+      ghost_dist = abs(pac_pos[0]-ghost[0]) + abs(pac_pos[1]-ghost[1])
       #update closest ghost
       if (ghost_dist < close_ghost):
         close_ghost = ghost_dist
-        close_ghost_pos = ghost
-  #combine them (weighted somehow?) i'd think a close ghost is worse than close food is good
-  eval = close_ghost + 1000*(1.0/closest_food)
 
-   #check if ghosts and food are same direction
-  #food_x = closest_food_pos[0] - pac_pos[0]
-  #food_y = closest_food_pos[1] - pac_pos[1]
-  #ghost_x = close_ghost_pos[0] - pac_pos[0]
-  #ghost_y = close_ghost_pos[1] - pac_pos[1]
+  #check if capsule is nearby
+  closest_capsule = sys.maxint
+  for capsule in cap_pos:
+    cap_dist = abs(pac_pos[0]-capsule[0]) + abs(pac_pos[1]-capsule[1])
+    #update closest capsule
+    if (cap_dist < closest_capsule):
+      closest_capsule = cap_dist
 
-  #if (food_x*ghost_x < 0):
-    #eval += 0.5
-  #if (food_y*ghost_y < 0):
-    #eval += 0.5
+   #check if any ghosts are scared
+  scared_time = 0
+  for ghost in ghosts:
+    if scared_time < ghost.scaredTimer:
+      scared_time = ghost.scaredTimer
 
-  #maybe the number of food left (the fewer left the better?):
+  #generate the scores (closest food, closest ghost, amount of food, closest capsule, scared timer)
+
+  #closest food
+  if closest_food == 1:
+    food_score = 10
+  else:
+    food_score = 1.0/closest_food
+
+  #closest ghost
+  if ghost_dist < 3:
+    return -1000
+  else:
+    ghost_score = ghost_dist
+
+  # amt food
   num_food_left = currentGameState.getNumFood()
-  eval += (1/(num_food_left))*5000
-  num_cap_left = len(currentGameState.getCapsules() )
-  eval += (1/(num_cap_left))*25000
+  foodnum_score = 100/num_food_left
 
-  #also if you've reached a win or loose state
-  if currentGameState.isLose():
-    eval -= 100000000000
-  elif currentGameState.isWin():
-    eval += 100000000000
+  #closest capsule
+  cap_score = 1000/closest_capsule
 
-  #return statement
+  #num capsules
+  capnum_score = 10000*len(cap_pos)
+
+  #scared timer
+  scare_score = 100*scared_time
+
+  #combine scores and return
+  eval = currentGameState.getScore() + food_score + foodnum_score + cap_score + capnum_score + scare_score
+  print(food_score)
   return eval
+
+
+
 
 
 # Abbreviation
