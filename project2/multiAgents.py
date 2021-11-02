@@ -406,6 +406,8 @@ def betterEvaluationFunction(currentGameState):
   #closest ghost
   if ghost_dist < 3:
     return -1000
+  elif scared_time > 2:
+    ghost_score = 1.0/ghost_dist
   else:
     ghost_score = ghost_dist
 
@@ -424,7 +426,7 @@ def betterEvaluationFunction(currentGameState):
 
   #combine scores and return
   eval = currentGameState.getScore() + food_score + foodnum_score + cap_score + capnum_score + scare_score
-  print(food_score)
+  print(scare_score)
   return eval
 
 
