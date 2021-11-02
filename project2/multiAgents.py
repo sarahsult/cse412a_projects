@@ -404,10 +404,10 @@ def betterEvaluationFunction(currentGameState):
     food_score = 1.0/closest_food
 
   #closest ghost
-  if ghost_dist < 3:
-    return -1000
-  elif scared_time > 2:
+  if scared_time > 2:
     ghost_score = 1.0/ghost_dist
+  elif ghost_dist < 3:
+    return -1000
   else:
     ghost_score = ghost_dist
 

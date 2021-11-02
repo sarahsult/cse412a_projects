@@ -25,7 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="still gettings stuck in bottom left corner but simplified code and accounted for all? factors with weights">
+    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="jk now it has all the factors I want (forgot to go towards ghosts if they're scared)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project2/multiAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/project2/multiAgents.py" afterDir="false" />
     </list>
@@ -122,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635830672959</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="jk now it has all the factors I want (forgot to go towards ghosts if they're scared)">
+      <created>1635830938517</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1635830938517</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,18 +151,19 @@
     <MESSAGE value="non-functional question 5" />
     <MESSAGE value="tried to check direction" />
     <MESSAGE value="still gettings stuck in bottom left corner but simplified code and accounted for all? factors with weights" />
-    <option name="LAST_COMMIT_MESSAGE" value="still gettings stuck in bottom left corner but simplified code and accounted for all? factors with weights" />
+    <MESSAGE value="jk now it has all the factors I want (forgot to go towards ghosts if they're scared)" />
+    <option name="LAST_COMMIT_MESSAGE" value="jk now it has all the factors I want (forgot to go towards ghosts if they're scared)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="229" y="70" key="SettingsEditor" timestamp="1632303243769">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="229" y="70" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1632303243769" />
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1635830690731">
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1635830953114">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="320" y="157" key="Vcs.Push.Dialog.v2/0.23.1440.817@0.23.1440.817" timestamp="1635187528961" />
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1635830690731" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1635830953114" />
     <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1635793760002">
       <screen x="0" y="23" width="1440" height="817" />
     </state>
