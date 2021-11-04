@@ -330,6 +330,8 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
 
     #for each successor of state
     legal_actions = gameState.getLegalActions(index)
+    if not legal_actions:
+      return self.evaluationFunction(gameState)
     successors = list()
     for action in legal_actions:
       successors.append((gameState.generateSuccessor(index, action), action))
@@ -381,7 +383,7 @@ def betterEvaluationFunction(currentGameState):
       if (ghost_dist < close_ghost):
         close_ghost = ghost_dist
 
-  #check if capsule is nearby
+  # #check if capsule is nearby
   closest_capsule = sys.maxint
   for capsule in cap_pos:
     cap_dist = abs(pac_pos[0]-capsule[0]) + abs(pac_pos[1]-capsule[1])
@@ -398,8 +400,8 @@ def betterEvaluationFunction(currentGameState):
   #generate the scores (closest food, closest ghost, amount of food, closest capsule, scared timer)
 
   #closest food
-  if closest_food == 1:
-    food_score = 10
+  if closest_food == 0:
+    food_score = 1000000
   else:
     food_score = 1.0/closest_food
 
@@ -407,7 +409,7 @@ def betterEvaluationFunction(currentGameState):
   if scared_time > 2:
     ghost_score = 1.0/ghost_dist
   elif ghost_dist < 3:
-    return -1000
+    ghost_score = -10000000
   else:
     ghost_score = ghost_dist
 
@@ -419,14 +421,17 @@ def betterEvaluationFunction(currentGameState):
   cap_score = 1000/closest_capsule
 
   #num capsules
-  capnum_score = 10000*len(cap_pos)
+  capnum_score = 0
+  if len(cap_pos) != 0:
+    capnum_score = 100000/len(cap_pos)
 
-  #scared timer
-  scare_score = 100*scared_time
+  # #scared timer
+  scare_score = 0
+  if scared_time > 2:
+    scare_score = 100000
 
   #combine scores and return
-  eval = currentGameState.getScore() + food_score + foodnum_score + cap_score + capnum_score + scare_score
-  print(scare_score)
+  eval = 1000000*currentGameState.getScore() + foodnum_score + cap_score + capnum_score + scare_score + ghost_score + food_score
   return eval
 
 
@@ -439,6 +444,8 @@ better = betterEvaluationFunction
 class ContestAgent(MultiAgentSearchAgent):
   """
     Your agent for the mini-contest
+    Description: I combined the Minimax implementation to account for the ghosts behaving (somewhat)
+    rationally and my better eval function which deals well with the capsules/scared ghosts.
   """
 
   def getAction(self, gameState):
@@ -450,7 +457,64 @@ class ContestAgent(MultiAgentSearchAgent):
       just make a beeline straight towards Pacman (or away from him if they're scared!)
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return self.maxlevel(gameState, 0, 0)[1]
+
+  def minimax(self, gameState, index, depth):
+    # this would mean we are at a terminal node or the game is over
+    if depth is self.depth * gameState.getNumAgents():
+      return betterEvaluationFunction(gameState)
+    if gameState.isLose() or gameState.isWin():
+      return betterEvaluationFunction(gameState)
+
+  # the root is pacman which is a maxlevel and index 0 so by pattern, even indicies will go to maxlevel and odd to minlvel
+    if index == 0 % 2:
+      return self.maxlevel(gameState, 0, depth)[0]
+    else:
+      return self.minlevel(gameState, index, depth)[0]
+
+
+  def maxlevel(self, gameState, index, depth):
+    # initiate to -inf
+    v = [-sys.maxint, "action"]
+
+    # for each successor of state
+    legal_actions = gameState.getLegalActions(index)
+    if not legal_actions:
+      return self.evaluationFunction(gameState)
+    successors = list()
+    for action in legal_actions:
+      successors.append((gameState.generateSuccessor(index, action), action))
+
+    # take the max
+    for successor in successors:
+      succ_action = (self.minimax(successor[0], (depth + 1) % gameState.getNumAgents(), depth + 1), successor[1])
+      if (v[0] < succ_action[0]):
+        v = succ_action
+
+    return v
+
+
+  def minlevel(self, gameState, index, depth):
+    # initiate to inf
+    v = [sys.maxint, "action"]
+
+    # for each successor of state
+    legal_actions = gameState.getLegalActions(index)
+    if not legal_actions:
+      return self.evaluationFunction(gameState)
+    successors = list()
+    for action in legal_actions:
+      successors.append((gameState.generateSuccessor(index, action), action))
+
+  # take the min
+    for successor in successors:
+      succ_action = (self.minimax(successor[0], (depth + 1) % gameState.getNumAgents(), depth + 1), successor[1])
+      # if(v[0]<succ_action[0]):
+      # v=succ_action
+      if (succ_action[0] < v[0]):
+        v = succ_action
+
+    return v
 
 
 
