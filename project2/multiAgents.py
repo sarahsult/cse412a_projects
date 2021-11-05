@@ -289,7 +289,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
     """
     "*** YOUR CODE HERE ***"
     #Pacman is a max level so we will want to get the info from the function for max level
-    return self.maxlevel(gameState, 0, 0, "action")[1]     #THIS NEEDS TO BE AN ACTION
+    return self.maxlevel(gameState, 0, 0, gameState.getLegalActions()[0])[1]     #THIS NEEDS TO BE AN ACTION
   
   def expectimax(self, gameState, index, depth, action):
     #this would mean we are at a terminal node or the game is over
@@ -337,7 +337,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
       successors.append((gameState.generateSuccessor(index, action), action))
 
     #find the probability
-    prob = 1/len(legal_actions)
+    prob = float(1/len(legal_actions))
     for successor in successors:
       v[0] += prob * self.expectimax(successor[0], (depth + 1)%gameState.getNumAgents(), depth+1, action)
     
@@ -356,9 +356,9 @@ def betterEvaluationFunction(currentGameState):
   "*** YOUR CODE HERE ***"
 
   if currentGameState.isLose():
-    return -sys.maxint
+    return -float('inf')
   elif currentGameState.isWin():
-    return sys.maxint
+    return float('inf')
 
   #useful values
   pac_pos = currentGameState.getPacmanPosition()
@@ -400,38 +400,35 @@ def betterEvaluationFunction(currentGameState):
   #generate the scores (closest food, closest ghost, amount of food, closest capsule, scared timer)
 
   #closest food
-  if closest_food == 0:
-    food_score = 1000000
-  else:
-    food_score = 1.0/closest_food
+  food_score = 1.0/closest_food
 
   #closest ghost
   if scared_time > 2:
     ghost_score = 1.0/ghost_dist
   elif ghost_dist < 3:
-    ghost_score = -10000000
+    ghost_score = -sys.maxint
   else:
-    ghost_score = ghost_dist
+     ghost_score = ghost_dist
 
   # amt food
   num_food_left = currentGameState.getNumFood()
-  foodnum_score = 100/num_food_left
+  foodnum_score = 10/num_food_left
 
   #closest capsule
-  cap_score = 1000/closest_capsule
+  cap_score = -100*closest_capsule
 
   #num capsules
   capnum_score = 0
   if len(cap_pos) != 0:
-    capnum_score = 100000/len(cap_pos)
+    capnum_score = -10*len(cap_pos)
 
   # #scared timer
   scare_score = 0
   if scared_time > 2:
-    scare_score = 100000
+    scare_score = 100
 
   #combine scores and return
-  eval = 1000000*currentGameState.getScore() + foodnum_score + cap_score + capnum_score + scare_score + ghost_score + food_score
+  eval = currentGameState.getScore() + foodnum_score + cap_score + capnum_score + scare_score + ghost_score + food_score
   return eval
 
 
@@ -475,7 +472,7 @@ class ContestAgent(MultiAgentSearchAgent):
 
   def maxlevel(self, gameState, index, depth):
     # initiate to -inf
-    v = [-sys.maxint, "action"]
+    v = [-sys.maxint, Directions.STOP]
 
     # for each successor of state
     legal_actions = gameState.getLegalActions(index)
@@ -496,7 +493,7 @@ class ContestAgent(MultiAgentSearchAgent):
 
   def minlevel(self, gameState, index, depth):
     # initiate to inf
-    v = [sys.maxint, "action"]
+    v = [sys.maxint, Directions.STOP]
 
     # for each successor of state
     legal_actions = gameState.getLegalActions(index)
