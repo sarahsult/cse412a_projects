@@ -37,6 +37,22 @@ class ValueIterationAgent(ValueEstimationAgent):
     self.values = util.Counter() # A Counter is a dict with default 0
      
     "*** YOUR CODE HERE ***"
+
+    '''
+    for iteration in range(self.iterations):
+      for state in self.mdp.getStates():
+        if self.mdp.isTerminal():
+          slef.values[state] = 0.0              #b/c ther isn't anything to do??
+        else:
+          for each action possible from this state:
+            value_of_best_action = None
+            q_value = getQValue(state, action)
+
+            if value_of_best_action == None:
+              value_of_best_action = q_value
+            else:
+              value_of_best_action = max(value_of_best_action, q_value)
+    '''
     
   def getValue(self, state):
     """
@@ -54,6 +70,14 @@ class ValueIterationAgent(ValueEstimationAgent):
       to derive it on the fly.
     """
     "*** YOUR CODE HERE ***"
+
+    '''
+    for next_state, prob_of_state in self.mdp.getTransitionStatesAndProbs(state, action):
+      reward = self.mdp.getReward(state, action, next_state)
+      value = self.values[nextState]
+      q_value = prob_of_state*(reward + self.discount*value)
+    '''
+
     util.raiseNotDefined()
 
   def getPolicy(self, state):
