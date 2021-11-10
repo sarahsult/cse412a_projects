@@ -38,22 +38,25 @@ class ValueIterationAgent(ValueEstimationAgent):
      
     "*** YOUR CODE HERE ***"
 
-    '''
+    states = self.mdp.getStates()
+    value_holder = dict()
     for iteration in range(self.iterations):
-      for state in self.mdp.getStates():
-        if self.mdp.isTerminal():
-          slef.values[state] = 0.0              #b/c ther isn't anything to do??
-        else:
-          for each action possible from this state:
-            value_of_best_action = None
-            q_value = getQValue(state, action)
+      for state in states:
+        actions = self.mdp.getPossibleActions(state)
+        value_of_best_action = 0
+        for action in actions:
+          q_value = self.getQValue(state, action)
 
-            if value_of_best_action == None:
-              value_of_best_action = q_value
-            else:
-              value_of_best_action = max(value_of_best_action, q_value)
-    '''
-    
+          if value_of_best_action == 0:
+            value_of_best_action = q_value
+          else:
+            value_of_best_action = max(value_of_best_action, q_value)
+        value_holder[state] = value_of_best_action
+    for state in states:
+      self.values[state] = value_holder[state]
+
+
+
   def getValue(self, state):
     """
       Return the value of the state (computed in __init__).
@@ -70,15 +73,12 @@ class ValueIterationAgent(ValueEstimationAgent):
       to derive it on the fly.
     """
     "*** YOUR CODE HERE ***"
-
-    '''
+    q_value = 0.0
     for next_state, prob_of_state in self.mdp.getTransitionStatesAndProbs(state, action):
       reward = self.mdp.getReward(state, action, next_state)
-      value = self.values[nextState]
-      q_value = prob_of_state*(reward + self.discount*value)
-    '''
-
-    util.raiseNotDefined()
+      value = self.values[next_state]
+      q_value += prob_of_state*(reward + self.discount*value)
+    return q_value
 
   def getPolicy(self, state):
     """
@@ -89,7 +89,17 @@ class ValueIterationAgent(ValueEstimationAgent):
       terminal state, you should return None.
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    if len(self.mdp.getPossibleActions(state)) == 0:
+      return None
+
+    policy = None
+    for action in self.mdp.getPossibleActions(state):
+      if policy == None:
+        policy = action
+      elif self.getQValue(state, action) > self.getQValue(state, policy):
+        policy = action
+
+    return policy
 
   def getAction(self, state):
     "Returns the policy at the state (no exploration)."

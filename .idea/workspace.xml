@@ -25,9 +25,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="has the (sort of) functional extra credit">
+    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="final">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project2/multiAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/project2/multiAgents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/valueIterationAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/project3/valueIterationAgents.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635874984147</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="final">
+      <created>1636135732646</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1636135732647</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -160,23 +167,25 @@
     <MESSAGE value="still gettings stuck in bottom left corner but simplified code and accounted for all? factors with weights" />
     <MESSAGE value="jk now it has all the factors I want (forgot to go towards ghosts if they're scared)" />
     <MESSAGE value="last push" />
-    <option name="LAST_COMMIT_MESSAGE" value="last push" />
+    <MESSAGE value="final" />
+    <option name="LAST_COMMIT_MESSAGE" value="final" />
   </component>
   <component name="WindowStateProjectService">
     <state x="229" y="70" key="SettingsEditor" timestamp="1632303243769">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="229" y="70" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1632303243769" />
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1635874998979">
-      <screen x="0" y="23" width="1440" height="821" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1636135743291">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state x="320" y="157" key="Vcs.Push.Dialog.v2/0.23.1440.817@0.23.1440.817" timestamp="1635187528961" />
     <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1635874998979" />
-    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1635984209746">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.823@0.23.1440.823" timestamp="1636135743291" />
+    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636493005688">
+      <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="511" y="352" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.817@0.23.1440.817" timestamp="1635793760002" />
-    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.821@0.23.1440.821" timestamp="1634152205376" />
+    <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.821@0.23.1440.821" timestamp="1636493005688" />
     <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.823@0.23.1440.823" timestamp="1635984209746" />
   </component>
 </project>
