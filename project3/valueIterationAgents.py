@@ -39,21 +39,20 @@ class ValueIterationAgent(ValueEstimationAgent):
     "*** YOUR CODE HERE ***"
 
     states = self.mdp.getStates()
-    value_holder = dict()
     for iteration in range(self.iterations):
+      value_of_best_action = util.Counter()
       for state in states:
+
         actions = self.mdp.getPossibleActions(state)
-        value_of_best_action = 0
+        temp = -1000
         for action in actions:
           q_value = self.getQValue(state, action)
+          temp = max(temp, q_value)
+        if temp != -1000:
+          value_of_best_action[state] = temp
+      for state in states:
+        self.values[state] = value_of_best_action[state]
 
-          if value_of_best_action == 0:
-            value_of_best_action = q_value
-          else:
-            value_of_best_action = max(value_of_best_action, q_value)
-        value_holder[state] = value_of_best_action
-    for state in states:
-      self.values[state] = value_holder[state]
 
 
 
@@ -76,7 +75,7 @@ class ValueIterationAgent(ValueEstimationAgent):
     q_value = 0.0
     for next_state, prob_of_state in self.mdp.getTransitionStatesAndProbs(state, action):
       reward = self.mdp.getReward(state, action, next_state)
-      value = self.values[next_state]
+      value = self.getValue(next_state)
       q_value += prob_of_state*(reward + self.discount*value)
     return q_value
 
