@@ -25,7 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="Q1 done">
+    <list default="true" id="415573a5-da7d-4235-8328-b9c2b6ca4be1" name="Default Changelist" comment="Q2 done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project3/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/project3/analysis.py" afterDir="false" />
     </list>
@@ -157,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636578143833</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Q2 done">
+      <created>1636578757034</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1636578757034</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,18 +191,19 @@
     <MESSAGE value="final" />
     <MESSAGE value="Q1 maybe works?" />
     <MESSAGE value="Q1 done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Q1 done" />
+    <MESSAGE value="Q2 done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Q2 done" />
   </component>
   <component name="WindowStateProjectService">
     <state x="229" y="70" key="SettingsEditor" timestamp="1632303243769">
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="229" y="70" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1632303243769" />
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1636578152069">
-      <screen x="0" y="23" width="1440" height="823" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2" timestamp="1636578765167">
+      <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="320" y="157" key="Vcs.Push.Dialog.v2/0.23.1440.817@0.23.1440.817" timestamp="1635187528961" />
-    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1636572565662" />
+    <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.821@0.23.1440.821" timestamp="1636578765167" />
     <state x="320" y="158" key="Vcs.Push.Dialog.v2/0.23.1440.823@0.23.1440.823" timestamp="1636578152069" />
     <state x="511" y="354" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1636493005688">
       <screen x="0" y="23" width="1440" height="821" />
