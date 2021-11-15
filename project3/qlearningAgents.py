@@ -38,6 +38,7 @@ class QLearningAgent(ReinforcementAgent):
     ReinforcementAgent.__init__(self, **args)
 
     "*** YOUR CODE HERE ***"
+    self.values = util.Counter()
 
   def getQValue(self, state, action):
     """
@@ -46,7 +47,7 @@ class QLearningAgent(ReinforcementAgent):
       a state or (state,action) tuple
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return self.values[(state, action)] #a counter takes care of returning 0 if the (state, action) is not in self.values
 
 
   def getValue(self, state):
@@ -57,7 +58,14 @@ class QLearningAgent(ReinforcementAgent):
       terminal state, you should return a value of 0.0.
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    actions = self.getLegalActions(state)  
+    if len(actions) == 0:     #is a terminal state
+      return 0.0
+    else:
+      qs = list()
+      for action in actions:
+        qs.append(self.getQValue(state, action))
+      return (max(qs))
 
   def getPolicy(self, state):
     """
@@ -66,7 +74,24 @@ class QLearningAgent(ReinforcementAgent):
       you should return None.
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    actions = self.getLegalActions(state)
+
+    if len(actions) == 0:     #terminal state
+      return None
+    else:
+      other_state_values = list()
+      for action in actions:
+        other_state_values.append(self.getQValue(state, action))  #these states will be in the same order as the legal actions
+      
+      #what if every state has the same value? We don't want to always take the last one in the list so let's find *all* the max state
+      #values and randomly select one
+      max_value = max(other_state_values)         #keeps the largest *value*
+      max_states = list()     #keeps all *states* with that value
+      for index in range(len(other_state_values)):
+        if other_state_values[index] == max_value:
+          max_states.append(index)
+      
+      return actions[random.choice(max_states)]
 
   def getAction(self, state):
     """
@@ -83,9 +108,15 @@ class QLearningAgent(ReinforcementAgent):
     legalActions = self.getLegalActions(state)
     action = None
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
-
-    return action
+    if len(legalActions) == 0:
+      return action
+    else:
+      probability = util.flipCoin(self.epsilon)   #returns true if the random value generated is less than epsilon
+      if probability:
+        action = random.choice(legalActions)
+      else:
+        action = self.getPolicy(state)
+      return action
 
   def update(self, state, action, nextState, reward):
     """
@@ -97,7 +128,11 @@ class QLearningAgent(ReinforcementAgent):
       it will be called on your behalf
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    old_estimate = self.values[(state, action)]  
+    new_sample_estimate = reward + self.discount*self.getValue(nextState)  
+    difference = new_sample_estimate - old_estimate
+
+    self.values[(state, action)] = old_estimate + self.alpha*difference
 
 class PacmanQAgent(QLearningAgent):
   "Exactly the same as QLearningAgent, but with different default parameters"
